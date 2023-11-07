@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
-import { ThreeEvent, useFrame, useLoader } from "@react-three/fiber";
+import React, { useRef } from "react";
+import { ThreeEvent, useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 import { easing } from 'maath';
 import { Select } from '@react-three/postprocessing'
 import { useSnapshot } from "valtio";
-import { state } from "../store";
+import { state } from "../../store";
 
 interface BoxProps {
   meshId?: number;
@@ -68,7 +68,7 @@ const Box: React.FC<BoxProps> = ({meshId, ...props}) => {
         <meshPhysicalMaterial 
         // <meshStandardMaterial 
           // map={texture}
-          color={snap.buttunColor[meshId!]}
+          color={snap.buttunColor[meshId!-1]}
           // // opacity={0.2}
           // transparent
           // // wireframe

@@ -1,4 +1,5 @@
 import { useLoader, useThree } from "@react-three/fiber";
+import { Suspense } from "react";
 import { TextureLoader, WebGLCubeRenderTarget } from "three";
 
 const Background = ({...props}) => {
@@ -11,7 +12,9 @@ const Background = ({...props}) => {
   ).fromEquirectangularTexture( gl, texture);
 
   return (
-    <primitive attach='background' object={formatted.texture}/>
+    <Suspense>
+      <primitive attach='background' object={formatted.texture}/>
+    </Suspense>
   )
 }
 

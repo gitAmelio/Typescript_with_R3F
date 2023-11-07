@@ -1,4 +1,3 @@
-import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import { BufferGeometry, DoubleSide } from "three";
 
@@ -23,7 +22,7 @@ const CustomObject = ({...props}) => {
   }, [])
   
   return (
-    <mesh>
+    <mesh {...props}>
       <bufferGeometry ref={geometryRef}>
         <bufferAttribute 
           attach="attributes-position" 

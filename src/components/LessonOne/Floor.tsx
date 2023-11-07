@@ -1,10 +1,11 @@
 
 
 const Floor = ({...props}) => {
+  const {color} = props;
   return (
-    <mesh {...props} position={[0,-2,0]} receiveShadow>
+    <mesh {...props} receiveShadow>
       <boxGeometry args={[20,1,10]}/>
-      <meshPhysicalMaterial />
+      <meshPhysicalMaterial  color={color} />
     </mesh>
   )
 }

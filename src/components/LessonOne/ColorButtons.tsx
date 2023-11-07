@@ -1,12 +1,12 @@
 import { useSnapshot } from "valtio";
-import { state } from "../store";
+import { state } from "../../store";
 
 const ColorButtons = () => {
 
   const snap = useSnapshot(state)
 
   const handleClick = (color: string) => {
-     state.buttunColor[state.active] = color;
+     state.buttunColor[state.active-1] = color;
   } 
 
   const generateButtons = snap.colors.map( color => {
@@ -19,10 +19,7 @@ const ColorButtons = () => {
           width: 50,
           borderRadius: 45,
           margin: 10,
-
           border: 'solid white 2px',
-
-          
         }}
       >
       </div>

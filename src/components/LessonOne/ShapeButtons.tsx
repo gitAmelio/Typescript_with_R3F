@@ -1,5 +1,5 @@
 import { useSnapshot } from "valtio"
-import { Shape, state } from "../store"
+import { Shape, state } from "../../store"
 
 const ShapeButtons = () => {
   const snap = useSnapshot(state);

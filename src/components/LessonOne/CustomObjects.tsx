@@ -9,10 +9,10 @@ const CustomObjects = (({...props}) => {
   const groupRef = useRef<Group>(null)
 
   useFrame((state, delta) => {
-    const angle = state.clock.elapsedTime;
-    state.camera.position.x = Math.sin(angle) * 8;
-    state.camera.position.z = Math.cos(angle) * 8;
-    state.camera.lookAt(0,0,0);
+    // const angle = state.clock.elapsedTime;
+    // state.camera.position.x = Math.sin(angle) * 8;
+    // state.camera.position.z = Math.cos(angle) * 8;
+    // state.camera.lookAt(0,0,0);
   })
 
   return (
@@ -21,7 +21,7 @@ const CustomObjects = (({...props}) => {
             <EffectComposer multisampling={8} autoClear={false}>
               <Outline blur visibleEdgeColor={0xffffff} edgeStrength={10} width={1000} />
             </EffectComposer>
-            <group ref={groupRef}>
+            <group ref={groupRef} >
               <Suspense fallback={null}>
                 <Box meshId={1} position={[-2,1,0]}/>
               </Suspense>
@@ -30,7 +30,7 @@ const CustomObjects = (({...props}) => {
               </Suspense>
             </group>
           </Selection>
-          <CustomObject />
+          <CustomObject position={[0,1.5,0]}/>
     </>
   )
 })
