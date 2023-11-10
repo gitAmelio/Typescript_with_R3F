@@ -9,7 +9,8 @@ import {
   ContactShadows,
   Sky,
   Environment,
-  Lightformer
+  Lightformer,
+  Stage
 } from "@react-three/drei";
 import * as THREE from 'three';
 import { useControls } from 'leva';
@@ -30,6 +31,13 @@ const LessonFourEnv_Stage = ({...props}) => {
     ambientLightEnable,
     directionalLightEnabled,
     skyEnabled,
+    environmentEnabled,
+    lightformerEnabled,
+    envPlaneEnabled,
+    floorEnabled,
+    backgroundColorEnabled,
+    meshesEnabled,
+
   } = useControls({
     perfVisible: true,
     bakeShadowsEnabled: false,
@@ -39,12 +47,29 @@ const LessonFourEnv_Stage = ({...props}) => {
     ambientLightEnable: false,
     directionalLightEnabled: false,
     skyEnabled: false,
+    environmentEnabled: false,
+    lightformerEnabled: false,
+    envPlaneEnabled: false,
+    floorEnabled: false,
+    backgroundColorEnabled: false,
+    meshesEnabled: false,
   })
   
-  state.normalShadow = contactShadowEnabled;
+  state.normalShadow = !contactShadowEnabled;
   
-  const { envMapIntensity, hdrEnabled, envColor, envColorEnabled, envPlaneColor } = useControls('environmentMaps',{
+  const { 
+    envMapIntensity,
+    envMapHeight,
+    envMapRadius,
+    envMapScale, 
+    
+    hdrEnabled, envColor, envColorEnabled, envPlaneColor 
+  } = useControls('environmentMaps',{
     envMapIntensity: { value: 3.5, min: 0, max: 12 },
+    envMapHeight: { value: 7, min: 0, max: 100},
+    envMapRadius: { value: 28, min: 10, max: 1000},
+    envMapScale: { value: 100, min: 10, max: 1000},
+
     hdrEnabled: false,
     
     envPlaneColor: [10,0,0],
@@ -60,7 +85,7 @@ const LessonFourEnv_Stage = ({...props}) => {
   })
 
   const { color, opacity, blur } = useControls('ContactShadows',{
-    color: '#1d8f75',
+    color: '#4b2709',
     opacity: {
       value: 0.4,
       min: 0,
@@ -79,13 +104,15 @@ const LessonFourEnv_Stage = ({...props}) => {
   })
   
   const cubeRef = useRef<THREE.Mesh>(null!);
+  const cubeRef2 = useRef<THREE.Mesh>(null!);
   const directionalLightRef = useRef<THREE.DirectionalLight>(null!);
   useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
 
   useFrame((stat, delta) => {
     // const time = state.clock.elapsedTime;
     // cubeRef.current.position.x = 2 + Math.sin(time);
-    cubeRef.current.rotation.y += delta * 0.2;
+    meshesEnabled && (cubeRef.current.rotation.y += delta * 0.2);
+     (cubeRef2.current.rotation.y += delta * 0.2);
   })
 
   const bakeOrSoft = bakeShadowsEnabled || softShadowsEnabled;
@@ -94,36 +121,50 @@ const LessonFourEnv_Stage = ({...props}) => {
   return (
     <>
 
-      <Environment 
-        background
-        // preset="night"
-        files={
-          hdrEnabled 
-          ? './environmentMaps/test.hdr' 
-          : [
-            './environmentMaps/2/px.jpg',
-            './environmentMaps/2/nx.jpg',
-            './environmentMaps/2/py.jpg',
-            './environmentMaps/2/ny.jpg',
-            './environmentMaps/2/pz.jpg',
-            './environmentMaps/2/nz.jpg',
-          ]
-        }
-      >
-        {envColorEnabled && <color args={ [envColor] } attach='background' /> }
-          <Lightformer 
-            position-z={ -5 }
-            scale={ 10 }
-            color="red"
-            intensity={ 2 }
-            form="ring"
-          />
-        {/* <mesh position-z={ -5 } scale={ 10 }>
-          <planeGeometry />
-          <meshBasicMaterial color={envPlaneColor} />
-        </mesh> */}
+      {
+        environmentEnabled &&
+        <Environment 
+          // background
+          ground={{
+            height: envMapHeight,
+            radius: envMapRadius,
+            scale: envMapScale,
+          }}
+          // preset="night"
+          // resolution={ 32 }
+          files={
+            hdrEnabled 
+            ? './environmentMaps/test.hdr' 
+            : [
+              './environmentMaps/2/px.jpg',
+              './environmentMaps/2/nx.jpg',
+              './environmentMaps/2/py.jpg',
+              './environmentMaps/2/ny.jpg',
+              './environmentMaps/2/pz.jpg',
+              './environmentMaps/2/nz.jpg',
+            ]
+          }
+        >
+          {envColorEnabled && <color args={ [envColor] } attach='background' /> }
+          {lightformerEnabled &&
+            <Lightformer 
+              position-z={ -5 }
+              scale={ 10 }
+              color="red"
+              intensity={ 2 }
+              form="ring"
+            />
+          }  
+          {
+            envPlaneEnabled &&
+            <mesh position-z={ -5 } scale={ 10 }>
+              <planeGeometry />
+              <meshBasicMaterial color={envPlaneColor} />
+            </mesh> 
+          }
 
-      </Environment>
+        </Environment> 
+      }
 
 
       {(softShadowsEnabled && !accOrContact) && <SoftShadows {...config} samples={bad ? Math.min(6, samples) : samples} />}
@@ -133,7 +174,7 @@ const LessonFourEnv_Stage = ({...props}) => {
       {
         (accumulativeShadowsEnabled && !contactShadowEnabled) &&
         <AccumulativeShadows
-          position={ [0, -0.999, 0] }
+          position={ [0, 0.01, 0] }
           scale={ 10 } // 10 is the default value
           color="#316d39"
           opacity={ 0.8 }
@@ -157,7 +198,7 @@ const LessonFourEnv_Stage = ({...props}) => {
       { 
         contactShadowEnabled && 
         <ContactShadows 
-          position={ [0, -0.99, 0] }
+          position={ [state.ground.x, state.ground.y - 0.01, state.ground.z] }
           scale={ 10 }
           resolution={ 512 }
           far={ 5 }
@@ -170,10 +211,9 @@ const LessonFourEnv_Stage = ({...props}) => {
         /> 
       }
 
-      <color attach='background' args={[ "purple" ]}/>
+     
       {perfVisible && <Perf position="top-left"/>}
       <OrbitControls makeDefault/> 
-
 
       {
         directionalLightEnabled &&
@@ -201,32 +241,60 @@ const LessonFourEnv_Stage = ({...props}) => {
       {/* need to Spherical Coords */}
       { skyEnabled && <Sky sunPosition={ sunPosition } /> } 
       
+      {backgroundColorEnabled && <color attach='background' args={[ "purple" ]}/>}
 
+      {
+        meshesEnabled &&
+        <>
+          <mesh castShadow position-y={ 1 } position-x={ -2} >
+            <sphereGeometry />
+            <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity}/>
+            {/* <meshStandardMaterial color={ color } /> */}
+          </mesh>
 
-      <mesh castShadow position={ [-2, 0, 0] }>
-        <sphereGeometry />
-        <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity}/>
-        {/* <meshStandardMaterial color={ color } /> */}
-      </mesh>
-
-      <mesh castShadow ref={cubeRef} position-x={ 2 } >
-        <boxGeometry />
-        <meshStandardMaterial color="mediumpurple" envMapIntensity={envMapIntensity} />
-      </mesh>
-
-      <mesh 
-        position-y={ -1 } 
-        rotation-x={-Math.PI * 0.5}
-        scale={ 10 }
-        receiveShadow={ ((bakeOrSoft) && !accOrContact) || !accOrContact }
+          <mesh castShadow ref={cubeRef} position-y={ 1 } position-x={ 2 } >
+            <boxGeometry />
+            <meshStandardMaterial color="mediumpurple" envMapIntensity={envMapIntensity} />
+          </mesh>
+        </>
+      }
+      {
+       
+        <Stage
+          shadows={{ type: 'contact', opacity: 0.8, blur: 3}}
+          environment="sunset"
+          preset="portrait"
+          intensity={ 1.5 }
         >
-        <meshStandardMaterial 
-          color="greenyellow" 
-          side={ THREE.DoubleSide }
-          envMapIntensity={envMapIntensity}
-        />
-        <planeGeometry />
-      </mesh>
+          <mesh castShadow position-y={ 1 } position-x={ -2} >
+            <sphereGeometry />
+            <meshStandardMaterial color="orange" envMapIntensity={envMapIntensity}/>
+            {/* <meshStandardMaterial color={ color } /> */}
+          </mesh>
+
+          <mesh castShadow ref={cubeRef2} position-y={ 1 } position-x={ 2 } >
+            <boxGeometry />
+            <meshStandardMaterial color="mediumpurple" envMapIntensity={envMapIntensity} />
+          </mesh>
+        </Stage>
+      }
+
+      {
+        floorEnabled &&
+        <mesh 
+          position-y={ state.ground.y - 0.02 } 
+          rotation-x={-Math.PI * 0.5}
+          scale={ 10 }
+          receiveShadow={ ((bakeOrSoft) && !accOrContact) || !accOrContact }
+          >
+          <meshStandardMaterial 
+            color="greenyellow" 
+            side={ THREE.DoubleSide }
+            envMapIntensity={envMapIntensity}
+          />
+          <planeGeometry />
+        </mesh>
+      }
 
     </>
   )

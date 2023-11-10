@@ -4,6 +4,7 @@ export type Shape = 'box' | 'sphere';
 
 const state = proxy({
   normalShadow: true,
+  ground: {x:0, y:0, z:0}
   
   // colors: ['blue', 'yellow', 'red', 'green', 'white'],
   // buttunColor: ['blue', 'yellow'], 

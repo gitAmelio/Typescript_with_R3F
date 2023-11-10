@@ -20,16 +20,16 @@ const App = () => {
   // const enableNormal = () => {
   //   return state.normalShadow;
   // }
-  // const snap = useSnapshot(state)
-  
+  const snap = useSnapshot(state)
+  console.log(state.normalShadow)
 
   return (
     <div style={{height: '100vh', width: '100vw'}}>
-      {state.normalShadow && <div>test</div>}
+      {/* {state.normalShadow && <div>test</div>} */}
       <Leva collapsed/>
       <Canvas
-        // shadows={state.normalShadow}
-        shadows
+        shadows={state.normalShadow}
+        // shadows
         camera={{
           fov: 45,
           near: 0.1,
