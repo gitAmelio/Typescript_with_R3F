@@ -25,7 +25,6 @@ const App = () => {
 
   return (
     <div style={{height: '100vh', width: '100vw'}}>
-      {/* {state.normalShadow && <div>test</div>} */}
       <Leva collapsed/>
       <Canvas
         shadows={state.normalShadow}
