@@ -6,6 +6,7 @@ import LessonFourEnv_Stage from './components/LessonFour';
 import { state } from './store';
 import { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
+import LessonFiveModels from './components/LessonFive';
 // import LessonThreeDebug from './components/LessonThree';
 // import LessonTwoHelpers from './components/LessonTwoHelpers';
 
@@ -40,7 +41,8 @@ const App = () => {
         {/* <LessonOne /> */}
         {/* <LessonTwoHelpers /> */}
         {/* <LessonThreeDebug /> */}
-        <LessonFourEnv_Stage />
+        {/* <LessonFourEnv_Stage /> */}
+        <LessonFiveModels />
       </Canvas>
     </div>
   )
