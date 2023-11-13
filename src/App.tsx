@@ -7,6 +7,7 @@ import { state } from './store';
 import { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import LessonFiveModels from './components/LessonFive';
+import LessonSixText from './components/lessonSixText';
 // import LessonThreeDebug from './components/LessonThree';
 // import LessonTwoHelpers from './components/LessonTwoHelpers';
 
@@ -42,7 +43,8 @@ const App = () => {
         {/* <LessonTwoHelpers /> */}
         {/* <LessonThreeDebug /> */}
         {/* <LessonFourEnv_Stage /> */}
-        <LessonFiveModels />
+        {/* <LessonFiveModels /> */}
+        <LessonSixText />
       </Canvas>
     </div>
   )
