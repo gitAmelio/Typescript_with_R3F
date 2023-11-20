@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import LessonFiveModels from './components/LessonFive';
 import LessonSixText from './components/lessonSixText';
+import LessonSevenPortalScene from './components/LessonSevenPortalScene';
 // import LessonThreeDebug from './components/LessonThree';
 // import LessonTwoHelpers from './components/LessonTwoHelpers';
 
@@ -30,6 +31,7 @@ const App = () => {
       <Leva collapsed/>
       <Canvas
         shadows={state.normalShadow}
+        flat // toneMapping
         // shadows
         camera={{
           fov: 45,
@@ -44,7 +46,8 @@ const App = () => {
         {/* <LessonThreeDebug /> */}
         {/* <LessonFourEnv_Stage /> */}
         {/* <LessonFiveModels /> */}
-        <LessonSixText />
+        {/* <LessonSixText /> */}
+        <LessonSevenPortalScene />
       </Canvas>
     </div>
   )
