@@ -6,7 +6,7 @@ import Placeholder from './Placeholder';
 import Hamburger from './Hambuger';
 import Fox from './Fox';
 
-const LessonFiveModels = () => {
+const LessonFiveLoadModels = () => {
 
   return (
     <>
@@ -32,4 +32,4 @@ const LessonFiveModels = () => {
   )
 }
 
-export default LessonFiveModels;
+export default LessonFiveLoadModels;

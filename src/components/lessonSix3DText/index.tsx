@@ -4,7 +4,7 @@ import { Perf } from "r3f-perf";
 import TextAndDonutsR3F from "./TextAndDonutsR3F";
 import TextAndDonutsNative from "./TextAndDonutsNative";
 
-const LessonSixText = () => {
+const LessonSix3DText = () => {
 
   const { matcapID } = useControls({
     matcapID: {
@@ -33,4 +33,4 @@ const LessonSixText = () => {
   )
 }
 
-export default LessonSixText; 
+export default LessonSix3DText; 

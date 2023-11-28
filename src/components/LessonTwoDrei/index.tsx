@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { useRef } from "react";
 import './index.css'; 
 
-const LessonTwoHelpers = ({...props}) => {
+const LessonTwoDrei = ({...props}) => {
 
   const boxRef = useRef<THREE.Mesh>(null!);
   const sphereRef = useRef(null);
@@ -95,4 +95,4 @@ const LessonTwoHelpers = ({...props}) => {
   )
 }
 
-export default LessonTwoHelpers;
+export default LessonTwoDrei;

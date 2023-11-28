@@ -8,7 +8,7 @@ import ColorButtons from './ColorButtons';
 import ShapeButtons from './ShapeButtons';
 import CustomObjects from './CustomObjects';
 
-const LessonOne = () => {
+const LessonOne1stR3F = () => {
   
   return (
     <div style={{height: '100vh', width: '100vw'}}>
@@ -52,4 +52,4 @@ const LessonOne = () => {
   )
 }
 
-export default LessonOne; 
+export default LessonOne1stR3F; 

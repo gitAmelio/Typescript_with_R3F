@@ -14,7 +14,7 @@ import AccumulativeShadowsWrapper from "./components/AccumalativeShadowsWrapper"
 import SoftAndBakedShadows from "./components/SoftAndBakeShadows";
 import EnvironmentWrapper from "./components/EnvironmentWrapper";
 
-const LessonFourEnv_Stage = () => {
+const LessonFourEnvStaging = () => {
   
   const { 
     perfVisible, 
@@ -43,4 +43,4 @@ const LessonFourEnv_Stage = () => {
   )
 }
 
-export default LessonFourEnv_Stage;
+export default LessonFourEnvStaging;
