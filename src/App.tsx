@@ -1,16 +1,12 @@
 // import LessonOne from './components/LessonOne';
 import { Leva } from 'leva';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 // import * as THREE from 'three';
-import LessonFourEnv_Stage from './components/LessonFour';
 import { state } from './store';
-import { useEffect } from 'react';
 import { useSnapshot } from 'valtio';
-import LessonFiveModels from './components/LessonFive';
-import LessonSixText from './components/lessonSixText';
-import LessonSevenPortalScene from './components/LessonSevenPortalScene';
-// import LessonThreeDebug from './components/LessonThree';
-// import LessonTwoHelpers from './components/LessonTwoHelpers';
+import { LessonNinePostProcessingCustom, LessonNinePostProcessingStandard } from './components/LessonNinePostProcessing';
+import LessonEightPointerEvents from './components/LessonEightPointerEvents';
+
 
 // const handleOnCreated:((state: RootState) => void) = (state) => {
 //   // state.gl.setClearColor('#ff0000', 1)
@@ -47,7 +43,10 @@ const App = () => {
         {/* <LessonFourEnv_Stage /> */}
         {/* <LessonFiveModels /> */}
         {/* <LessonSixText /> */}
-        <LessonSevenPortalScene />
+        {/* <LessonSevenPortalScene /> */}
+        <LessonEightPointerEvents />
+        {/* <LessonNinePostProcessingStandard /> */}
+        {/* <LessonNinePostProcessingCustom /> */}
       </Canvas>
     </div>
   )
