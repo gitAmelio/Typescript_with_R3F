@@ -4,8 +4,9 @@ import { Canvas } from '@react-three/fiber';
 // import * as THREE from 'three';
 import { state } from './store';
 import { useSnapshot } from 'valtio';
-import { LessonNinePostProcessingCustom, LessonNinePostProcessingStandard } from './components/LessonNinePostProcessing';
-import LessonEightPointerEvents from './components/LessonEightPointerEvents';
+// import { LessonNinePostProcessingCustom, LessonNinePostProcessingStandard } from './components/LessonNinePostProcessing';
+// import LessonEightPointerEvents from './components/LessonEightPointerEvents';
+import LessonTenPortfolio from './components/LessonTenPortfolio';
 
 
 // const handleOnCreated:((state: RootState) => void) = (state) => {
@@ -16,9 +17,6 @@ import LessonEightPointerEvents from './components/LessonEightPointerEvents';
 
 const App = () => {
   
-  // const enableNormal = () => {
-  //   return state.normalShadow;
-  // }
   const snap = useSnapshot(state)
   console.log(state.normalShadow)
 
@@ -44,9 +42,10 @@ const App = () => {
         {/* <LessonFiveModels /> */}
         {/* <LessonSixText /> */}
         {/* <LessonSevenPortalScene /> */}
-        <LessonEightPointerEvents />
+        {/* <LessonEightPointerEvents /> */}
         {/* <LessonNinePostProcessingStandard /> */}
         {/* <LessonNinePostProcessingCustom /> */}
+        <LessonTenPortfolio />
       </Canvas>
     </div>
   )

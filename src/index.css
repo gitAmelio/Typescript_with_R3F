@@ -31,7 +31,14 @@ body {
 }
 
 canvas {
-  touch-action: action;
+  /***
+   * The drag target has its `touch-action` style property set to `auto`. 
+   * It is recommended to add `touch-action: 'none'` so that the drag gesture 
+   * behaves correctly on touch-enabled devices. 
+   * For more information read this: 
+   * https://use-gesture.netlify.app/docs/extras/#touch-action.
+   */
+  touch-action: none;
 }
 
 h1 {
