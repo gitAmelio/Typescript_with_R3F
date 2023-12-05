@@ -7,6 +7,7 @@ import { useSnapshot } from 'valtio';
 // import { LessonNinePostProcessingCustom, LessonNinePostProcessingStandard } from './components/LessonNinePostProcessing';
 // import LessonEightPointerEvents from './components/LessonEightPointerEvents';
 import LessonTenPortfolio from './components/LessonTenPortfolio';
+import LessonElevenPhysics from './components/LessonElevenPhysics';
 
 
 // const handleOnCreated:((state: RootState) => void) = (state) => {
@@ -45,7 +46,8 @@ const App = () => {
         {/* <LessonEightPointerEvents /> */}
         {/* <LessonNinePostProcessingStandard /> */}
         {/* <LessonNinePostProcessingCustom /> */}
-        <LessonTenPortfolio />
+        {/* <LessonTenPortfolio /> */}
+        <LessonElevenPhysics />
       </Canvas>
     </div>
   )
