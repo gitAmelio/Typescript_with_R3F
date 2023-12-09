@@ -8,6 +8,9 @@ import { useSnapshot } from 'valtio';
 // import LessonEightPointerEvents from './components/LessonEightPointerEvents';
 import LessonTenPortfolio from './components/LessonTenPortfolio';
 import LessonElevenPhysics from './components/LessonElevenPhysics';
+import LessonTwelveGameOn from './components/LessonTwelveGameOn';
+import { KeyboardControls } from '@react-three/drei';
+import UI from './components/LessonTwelveGameOn/UI';
 
 
 // const handleOnCreated:((state: RootState) => void) = (state) => {
@@ -19,36 +22,47 @@ import LessonElevenPhysics from './components/LessonElevenPhysics';
 const App = () => {
   
   const snap = useSnapshot(state)
-  console.log(state.normalShadow)
 
   return (
     <div style={{height: '100vh', width: '100vw'}}>
       <Leva collapsed/>
-      <Canvas
-        shadows={state.normalShadow}
-        flat // toneMapping
-        // shadows
-        camera={{
-          fov: 45,
-          near: 0.1,
-          far: 200,
-          position: [-4, 3, 6]
-        }}
-        // onCreated={handleOnCreated} 
+      <KeyboardControls
+        map={[
+          { name: 'forward', keys: [ 'ArrowUp', 'KeyW']},
+          { name: 'backward', keys: [ 'ArrowDown', 'KeyS']},
+          { name: 'left', keys: [ 'ArrowLeft', 'KeyA']},
+          { name: 'right', keys: [ 'ArrowRight', 'KeyD']},
+          { name: 'jump', keys: [ 'Space' ]},
+        ]}
       >
-        {/* <LessonOne /> */}
-        {/* <LessonTwoHelpers /> */}
-        {/* <LessonThreeDebug /> */}
-        {/* <LessonFourEnv_Stage /> */}
-        {/* <LessonFiveModels /> */}
-        {/* <LessonSixText /> */}
-        {/* <LessonSevenPortalScene /> */}
-        {/* <LessonEightPointerEvents /> */}
-        {/* <LessonNinePostProcessingStandard /> */}
-        {/* <LessonNinePostProcessingCustom /> */}
-        {/* <LessonTenPortfolio /> */}
-        <LessonElevenPhysics />
-      </Canvas>
+        <Canvas
+          shadows={state.normalShadow}
+          flat // toneMapping
+          // shadows
+          camera={{
+            fov: 45,
+            near: 0.1,
+            far: 200,
+            position: [-4, 3, 6]
+          }}
+          // onCreated={handleOnCreated} 
+        >
+          {/* <LessonOne /> */}
+          {/* <LessonTwoHelpers /> */}
+          {/* <LessonThreeDebug /> */}
+          {/* <LessonFourEnv_Stage /> */}
+          {/* <LessonFiveModels /> */}
+          {/* <LessonSixText /> */}
+          {/* <LessonSevenPortalScene /> */}
+          {/* <LessonEightPointerEvents /> */}
+          {/* <LessonNinePostProcessingStandard /> */}
+          {/* <LessonNinePostProcessingCustom /> */}
+          {/* <LessonTenPortfolio /> */}
+          {/* <LessonElevenPhysics /> */}
+          <LessonTwelveGameOn />
+        </Canvas>
+        <UI />
+      </KeyboardControls>
     </div>
   )
 }
