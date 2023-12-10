@@ -17,26 +17,30 @@ type Block = typeof BlockStart | typeof BlockEnd | typeof BlockLimbo | typeof Bl
 interface LevelProps {
   count?: number;
   types?: Block[];
+  seed?: number;
 }
 
-const Level = ({count = 5, types = Default}: LevelProps ) => {
+const Level = ({count = 5, types = Default, seed = 0}: LevelProps ) => {
 
   const blocks = useMemo(() => { 
     const blocks = []
 
     for (let i = 0; i < count; i++){
+      // select random level
       const index = Math.floor(Math.random() * types.length);
-      const type = types[index]
+      const type = types[index];
+      // add level to blocks
       blocks.push(type);
     }
 
     return blocks;
-  }, [count, types])
+  }, [count, types, seed])
   return (
     <>
+      
       <BlockStart position={[ 0, 0, 0 ]} />
       { blocks.map((Blck: Block, index) => <Blck  key={index} position={ [0, 0, -(index+1) * 4 ] }/>) }
-      <BlockEnd position={ [0, 0, (types.length+3) * -4 ] } />
+      <BlockEnd position={ [0, 0, (count+1) * -4 ] } />
 
       <Bounds length={count + 2} />      
     </>
