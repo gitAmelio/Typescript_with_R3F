@@ -1,47 +1,31 @@
-import { Text, useGLTF } from "@react-three/drei";
-import { boxGeometry, floor1Material } from "./Utils";
-import { RigidBody } from "@react-three/rapier";
+import { Text } from "@react-three/drei";
+import { BlockMesh, floor1Material } from "./Utils";
+import Trophy from "./Trophy";
 
 export interface BlockStartProps {
   position?: [ number, number, number];
 }
 
-const BlockEnd = ({position = [0,0,0]}: BlockStartProps) => {
+const FinishText = () => (
+  <Text 
+    font="./fonts/bebas-neue-v9-latin-regular.woff"
+    scale={ 1 }
+    position={ [0, 1.6, 0] }
+  >
+    FINISH
+    <meshBasicMaterial toneMapped={ false } />  
+  </Text>
+)
 
-  const hamburger = useGLTF('./hamburger.glb');
-
-  hamburger.scene.children.forEach( mesh => {
-    mesh.castShadow = true;
-  })
-
-  return (
-    <group position={position}>
-      <Text 
-        font="./fonts/bebas-neue-v9-latin-regular.woff"
-        scale={ 1 }
-        position={ [0, 1.6, 0] }
-      >
-        FINISH
-        <meshBasicMaterial toneMapped={ false } />  
-      </Text>
-      <mesh 
-        geometry={ boxGeometry } 
-        material={ floor1Material }
-        position={ [ 0, 0, 0 ] } 
-        scale={ [4, 0.2, 4] } 
-        receiveShadow
-      />
-      <RigidBody 
-        type="fixed"
-        colliders="hull"
-        position={ [ 0, .6, 0 ] }
-        restitution={ 0.2 }
-        friction={ 0 }
-      >
-        <primitive object={hamburger.scene} scale={0.2} position-y={ -0.5 }/>
-      </RigidBody>
-    </group>
-  )
-}
+const BlockEnd = ({position = [ 0, 0, 0 ]}: BlockStartProps) => (
+  <BlockMesh 
+    position={position}
+    material={floor1Material}
+    type = 'end'
+  >
+    <FinishText />
+    <Trophy />
+  </BlockMesh>
+)
 
 export default BlockEnd;

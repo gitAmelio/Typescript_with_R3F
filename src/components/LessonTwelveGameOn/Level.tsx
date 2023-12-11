@@ -35,11 +35,13 @@ const Level = ({count = 5, types = Default, seed = 0}: LevelProps ) => {
 
     return blocks;
   }, [count, types, seed])
+
+  const positionBlocks = () => blocks.map((Blck: Block, index) => <Blck  key={index} position={ [0, 0, -(index+1) * 4 ] }/>)
+
   return (
     <>
-      
       <BlockStart position={[ 0, 0, 0 ]} />
-      { blocks.map((Blck: Block, index) => <Blck  key={index} position={ [0, 0, -(index+1) * 4 ] }/>) }
+      { positionBlocks() }
       <BlockEnd position={ [0, 0, (count+1) * -4 ] } />
 
       <Bounds length={count + 2} />      

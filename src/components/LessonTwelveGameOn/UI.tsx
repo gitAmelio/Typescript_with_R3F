@@ -1,8 +1,8 @@
-import { useKeyboardControls } from '@react-three/drei';
-import './index.css';
-import useGame from './stores/useGame';
 import { useEffect, useRef } from 'react';
+import { useKeyboardControls } from '@react-three/drei';
 import { addEffect } from '@react-three/fiber';
+import useGame from './stores/useGame';
+import './index.css';
 
 const UI = () => {
 
@@ -31,8 +31,13 @@ const UI = () => {
 
       elapsedTime /= 1000;
       elapsedTime = +elapsedTime.toFixed(2);
-      if(timeRef.current)
-      timeRef.current.textContent = elapsedTime || '0.00';
+      if(timeRef.current){
+        if (!elapsedTime)  {
+          timeRef.current.textContent = '0.00'
+        } else {
+          timeRef.current.textContent = elapsedTime.toString();
+        }
+      }
     })
 
     return () => {

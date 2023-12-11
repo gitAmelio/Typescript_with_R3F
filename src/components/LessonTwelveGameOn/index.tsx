@@ -4,7 +4,7 @@ import Lights from "./Lights";
 import Level from "./Level";
 import Player from "./Player";
 import useGame from "./stores/useGame";
-import Effects from "./Effects";
+// import Effects from "./Effects";
 
 
 const LessonTwelveGameOn = () => {
